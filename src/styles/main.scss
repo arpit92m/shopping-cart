@@ -1,0 +1,306 @@
+$demo-blue: #005BA6;
+$demo-gray: #D6D6D6;
+$demo-placeholder: #C7C7C7;
+$demo-border: #E6E6E6;
+$body-color: #562842;
+$product-tile: #886673;
+
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  border: 2px solid #666;
+}
+
+body {
+  background: $body-color;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.cart {
+  margin:20px
+}
+
+$border-width: 3px;
+
+// Select function
+@mixin form-input-select(){
+  color: $demo-blue;
+  display: block;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 16px;
+  // padding: 11px 15px;
+  margin-top: 9px;
+  margin-bottom: 15px;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    pointer-events: none;
+
+    border: 1px solid transparent;
+    width: 0;
+    height: 0;
+    right: 16px;
+  }
+
+  &::before {
+    bottom: 55%;
+    border-width: 0 6.5px 8px 6.5px;
+    border-bottom-color: $demo-gray;
+  }
+
+  &::after {
+    border-width: 8px 6.5px 0 6.5px;
+    border-top-color: $demo-gray;
+    top: 55%;
+  }
+  
+  @-moz-document url-prefix() {
+    border-right: $border-width solid $demo-border;
+    
+    &:hover {
+      border-right: $border-width solid $demo-blue;
+    }
+  }
+
+  &:hover {
+
+    select {
+      box-shadow: 0 2px 3px rgba($demo-blue, 0.1) inset;
+      border-color: $demo-blue;
+
+      &:focus {
+        outline-color: transparent;
+      }
+      
+    }
+
+    &::before {
+      border-bottom-color: $demo-blue;
+    }
+    &::after {
+      border-top-color: $demo-blue;
+    }
+
+  }
+
+
+  select {
+    border: $border-width solid $demo-border;
+    border-radius: 0;
+    font-weight: 400;
+    color: inherit;
+    padding: 11px 15px;
+    line-height: normal;
+    position: relative;
+    left: 5%;
+
+
+    &:focus {
+      box-shadow: 0 3px 4px rgba($demo-blue, 0.3) inset;
+      // outline is critical for usability
+      outline: $border-width solid $demo-blue;
+      outline-offset: -#{$border-width}; //offset vs width
+    }
+
+    &[disabled], &:disabled{
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    // we use invalid like a placeholder
+    &:invalid {
+      color: $demo-placeholder;
+    }
+
+  }
+}
+
+// Show the function
+[include*="form-input-select()"] {
+  @include form-input-select();
+}
+
+.loading {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spinner {
+    background: url('https://gigacore.in/demos/react-weather-forecast/assets/loader.gif') no-repeat;
+    background-size: 100%;
+    height: 100px;
+    width: 100px;
+  }
+}
+
+.product-wrapper {
+
+  header {
+    text-align: center;
+
+    .heading {
+      font-size: 22px;
+      padding: 25px 0 0 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .product-tiles {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .product-tile {
+    background: $product-tile;
+    width: 25%;
+    margin: 10px;
+
+      .plus-css  {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .plus-minus{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        padding: 10px;
+
+        span {
+          font-size: 23px;
+          padding: 2px 10px;
+          padding-bottom: 3px;
+          border: 1px solid #b7ab6d;
+        }
+
+        .fa-minus-circle, .fa-plus-circle {
+          border: 1px solid #b7ab6d;
+        }
+
+      }
+
+      .icon {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .product-info {
+        display: flex;
+        justify-content: center;
+            width: 100%;
+
+        .min-max {
+          padding: 15px;
+          font-size: 20px;
+
+          .mrp-cut {
+            text-decoration: line-through;
+            color: black;
+            padding-left: 8px;
+
+            .mrp {
+              color: #999dd0;
+            }
+          }
+
+          strong {
+            font-weight: bold;
+            color: #fff;
+          }
+        }
+
+        .more-info {
+          padding: 0 10px;
+          font-size: 12px;
+        }
+      }
+
+      .primary-info {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .detailed-info {
+        padding: 20px;
+
+        .stock {
+          padding: 10px;
+          font-size: 17px;
+          background: #96755e;
+          text-align: center;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+.cart__body {
+  margin-bottom: 0.7em;
+}
+
+.cart-item {
+  margin-bottom: 0.3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item__name {
+  color: black;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+.cart-item__price {
+  font-weight: bold;
+  display: flex;
+  font-size: 17px;
+
+  .fa-inr {
+    color: black;
+    display: flex;
+  }
+}
+
+.cart__total {
+  font-weight: bold;
+  font-size: 1.5em;
+  line-height: 1.1em;
+  color: black;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10px;
+}
